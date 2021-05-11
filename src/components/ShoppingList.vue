@@ -1,19 +1,17 @@
 <template>
   <div>
-    <input type="text" v-model="newItem" placeholder="Add an Item">
+    <input v-on:keyup.enter="items.push({id: items.length + 1, label:newItem})" type="text" v-model="newItem"
+           placeholder="Add an Item">
     <label>
-      <input type="checkbox" v-model="newItemHighPriority">
+      <input
+          type="checkbox" v-model="newItemHighPriority">
       <strong>High Priority</strong>
     </label>
-    <br/>
-    {{newItem}} || {{newItemHighPriority}}
-    <br/>
-    <label><input type="checkbox" v-model="iceCreamFlavours" value="vanilla">vanilla</label>
-    <label><input type="checkbox" v-model="iceCreamFlavours" value="chocolate">chocolate</label>
-    <label><input type="checkbox" v-model="iceCreamFlavours" value="strawberry">strawberry</label>
-    <label><input type="checkbox" v-model="iceCreamFlavours" value="mango">mango</label>
+    <div>
+      <button v-on:click="items.push({id: items.length + 1, label:newItem})" class="btn btn-primary">Save Item</button>
+    </div>
     <ul>
-      <li v-for="item in items" :key="item.id">{{item.label}}</li>
+      <li v-for="item in items" :key="item.id">{{ item.label }}</li>
     </ul>
   </div>
 </template>
@@ -22,13 +20,13 @@
 export default {
   data() {
     return {
-      newItem:'',
+      newItem: '',
       newItemHighPriority: false,
-      iceCreamFlavours:[],
-      items:[
-        {id:1, label:'banana'},
-        {id:2, label:'apple'},
-        {id:3, label:'tea'},
+      iceCreamFlavours: [],
+      items: [
+        {id: 1,label: 'banana'},
+        {id: 2,label: 'apple'},
+        {id: 3,label: 'tea'},
       ]
     }
   },
