@@ -19,7 +19,10 @@
     </div>
     <p v-if="items.length === 0">Nice Job!, You have bought all your items</p>
     <ul>
-      <li v-for="item in items" :key="item.id">{{ item.label }}</li>
+      <li @click="togglePurchased(item)"
+          :class="[item.purchased ? 'strikeout' : 'underline' , item.highPriority ? 'priority' : '']"
+          v-for="item in items" :key="item.id">{{ item.label }}
+      </li>
     </ul>
   </div>
 </template>
@@ -33,20 +36,29 @@ export default {
       newItemHighPriority: false,
       iceCreamFlavours: [],
       items: [
-        {id: 1,label: 'banana'},
-        {id: 2,label: 'apple'},
-        {id: 3,label: 'tea'},
+        {id: 1,label: 'banana',purchased: true,highPriority: true},
+        {id: 2,label: 'apple',purchased: false,highPriority: true},
+        {id: 3,label: 'tea',purchased: false,highPriority: true},
       ]
     }
   },
   methods: {
     saveItem() {
-      this.items.push({id: this.items.length + 1,label: this.newItem})
+      this.items.push({
+        id: this.items.length + 1,
+        label: this.newItem,
+        highPriority: this.newItemHighPriority
+      })
       this.newItem = "" // reset newItem
+      this.newItemHighPriority = false
     },
     doEdit(editing) {
       this.editing = editing
       this.newItem = ""
+      this.newItemHighPriority = false
+    },
+    togglePurchased(item) {
+      item.purchased = !item.purchased;
     }
   }
 }
