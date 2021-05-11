@@ -14,7 +14,7 @@
         <strong>High Priority</strong>
       </label>
       <div>
-        <button v-on:click="saveItem" class="btn btn-primary">Save Item</button>
+        <button v-bind:disabled="newItem.length === 0" v-on:click="saveItem" class="btn btn-primary">Save Item</button>
       </div>
     </div>
     <p v-if="items.length === 0">Nice Job!, You have bought all your items</p>
