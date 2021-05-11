@@ -21,7 +21,7 @@
     <ul>
       <li @click="togglePurchased(item)"
           :class="[item.purchased ? 'strikeout' : 'underline' , item.highPriority ? 'priority' : '']"
-          v-for="item in items" :key="item.id">{{ item.label }}
+          v-for="item in reversedItems" :key="item.id">{{ item.label }}
       </li>
     </ul>
   </div>
@@ -40,6 +40,11 @@ export default {
         {id: 2,label: 'apple',purchased: false,highPriority: true},
         {id: 3,label: 'tea',purchased: false,highPriority: true},
       ]
+    }
+  },
+  computed:{
+    reversedItems(){
+      return [...this.items].reverse()
     }
   },
   methods: {
